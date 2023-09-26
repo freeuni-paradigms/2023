@@ -12,7 +12,7 @@ gcc bitwise_operators.c -o bitwise_operators
 ./bitwise_operators
 ```
 
-## [bitwise operations extended]
+## bitwise operations extended
 
 ```sh
 make
