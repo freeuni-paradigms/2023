@@ -1,4 +1,4 @@
-დავუშვათ ამ რეპოზიტორიის მისამართი ლოკალურ დისკზე (თქვენს მანქანაზე) არის: `/Users/lekva/teach/freeuni/paradigms/23-fall`
+დავუშვათ ამ რეპოზიტორიის მისამართი ლოკალურ დისკზე (თქვენს მანქანაზე) არის: `/Users/lekva/teach/freeuni/paradigms/2023`
 
 ## ინსტალაცია
 ```sh
@@ -13,19 +13,19 @@ cd /tmp/foo
 ```
 აქ არსებული min.s ასემბლი ფაილის გასაშვებათ ტერმინალში გაუშვით:
 ```sh
-java -jar tools/venus.jar min.s
+java -jar /Users/lekva/teach/freeuni/paradigms/2023/ams/venus.jar min.s
 ```
 
 ## ონლაინ სიმულატორი
 იგივე დირექტორიაში გაუშვით
 ```sh
-java -jar asm/venus.jar . -dm
+java -jar /Users/lekva/teach/freeuni/paradigms/2023/asm/venus.jar . -dm
 ```
 
 ამ ბრძანების გაშვების შედეგად ტერმინალში უნდა დაიბეჭდოს დიდი `Javalin` ლოგო.  
 თუ `port unable to be bound` შეცდომა ამოგიგდოთ, მაშინ ტერმინალში თავიდან გაუშვით (6162-ის ნაცვლად სხვა პორტის ნომერი შეგიძლიათ მიუთითოთ):
 ```sh
-java -jar tools/venus.jar . -dm --port 6162
+java -jar https://github.com/freeuni-paradigms/2023/tree/main/asm/venus.jar . -dm --port 6162
 ```
 
 ![Javalin](https://github.com/freeuni-paradigms/2023/raw/main/asm/01.png)
