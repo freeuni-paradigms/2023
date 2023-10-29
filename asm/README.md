@@ -45,3 +45,10 @@ mount local paradigms
 Simulator ტაბში შეგიძლიათ გაუშვათ (Run) ან დაადებაგოთ თქვენი ასემბლი კოდი Step ღილაკის გამოყენებით.
 
 ![simulator](https://github.com/freeuni-paradigms/2023/raw/main/asm/05.png)
+
+
+## Venus ემულატორის დოკუმენტაცია
+[https://inst.eecs.berkeley.edu/~cs61c/sp23/resources/venus-reference/](https://inst.eecs.berkeley.edu/~cs61c/sp23/resources/venus-reference/)
+
+## ecall ის დოკუმენტაცია
+[https://github.com/ThaumicMekanism/venus/wiki/Environmental-Calls](https://github.com/ThaumicMekanism/venus/wiki/Environmental-Calls)
