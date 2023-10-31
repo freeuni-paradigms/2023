@@ -12,6 +12,8 @@ https://classroom.google.com/c/NjIzNTk0MDIxOTUy?cjc=pa3fp55
 | დავალება | ქულა | მოსაწვევი | ჩაბარების თარიღი |
 |----------|------|-----------|------------------|
 | 01 - rsg | 3 | https://classroom.github.com/a/F_X9bgyM | 12/10/2023 |
+| 02 - six degrees | 7 | https://classroom.github.com/a/bd6CKJ7c | 29/10/2023 |
+
 
 ## Git basics
 შემდეგი დოკუმენტი აგიხსნით Git-ის საწყისებს და როგორ გამოიყენოთ ის დავალებების ჩასაბარებლად: 
