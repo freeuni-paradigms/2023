@@ -13,7 +13,7 @@ cd /tmp/foo
 ```
 აქ არსებული min.s ასემბლი ფაილის გასაშვებათ ტერმინალში გაუშვით:
 ```sh
-java -jar /Users/lekva/teach/freeuni/paradigms/2023/ams/venus.jar min.s
+java -jar /Users/lekva/teach/freeuni/paradigms/2023/asm/venus.jar min.s
 ```
 
 ## ონლაინ სიმულატორი
