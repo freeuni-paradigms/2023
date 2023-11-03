@@ -16,7 +16,7 @@ lb x11, 0(sp)
 addi sp, sp, 32
 
 # print_character(x11)
-li x10, 11
+li x10, 11 # 
 ecall
 
 # exit()
