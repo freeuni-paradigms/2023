@@ -27,6 +27,7 @@ void SetNew(sortedset *set, int elemSize,
 	set->logic_n = 0;
 	set->alloc_n = kInitialCapacity;
 	set->base = malloc(BaseSize(set));
+	*(int*)set->base = -1;
 }
 
 
@@ -47,7 +48,13 @@ printf("musta been fired");
 */
 void *SetSearch(sortedset *set, const void *elemPtr)
 {
-
+	int *index_ptr = FindNode(set, elemPtr); // &1
+	if(*index_ptr != -1){ // alrady in set
+		int found_idx = *index_ptr; // 1
+		return set->base + sizeof(int) + found_idx*(set->elemSize + 2*sizeof(int));
+	} else {
+		return NULL;
+	}
 }
 /*
 * Function: SetAdd
@@ -60,6 +67,27 @@ void *SetSearch(sortedset *set, const void *elemPtr)
 */
 bool SetAdd(sortedset *set, const void *elemPtr)
 {
+	int *index_ptr = FindNode(set, elemPtr);
+	if(*index_ptr != -1){ // alrady in set
+		return false;
+	}
+	if(set->logic_n == set->alloc_n) { // no space for new node
+		set->alloc_n*=2;
+		set->base = realloc(set->base, BaseSize(set));
+	}
+	int new_idx = set->logic_n;
+	set->logic_n++;
+	// TODO: check if there is space
+	// create new node
+	char *new_node_ptr = set->base + sizeof(int) + new_idx*(set->elemSize + 2*sizeof(int));
+	memcpy(new_node_ptr, elemPtr, set->elemSize); // copy T
+	int *child_idxs = new_node_ptr + set->elemSize;
+	child_idxs[0] = -1;
+	child_idxs[1] = -1;
+
+	// set node as child
+	*index_ptr = new_idx;
+	return true;
 }
 
 /**
@@ -78,8 +106,40 @@ if (*ip == -1) printf("ip points where this element belongs!");
 */
 static int *FindNode(sortedset *set, const void *elem)
 {
+	int cur_idx = *(int*)set->base; //0 -1
+	int *last_idx_ptr = set->base;
+	while(true){
+		if(cur_idx == -1){ // root
+			return last_idx_ptr;
+		}
+		char *cur = ((char*)set->base) + sizeof(int) + (set->elemSize + 2*sizeof(int))*(cur_idx);
+		int res= set->cmpfn(cur, elem);
+		// if < -1
+		// if == 0
+		// if > +1
+		if(res==0){
+			return last_idx_ptr;
+		}
+		if(res<0){ // right
+			cur+=set->elemSize + sizeof(int);
+			cur_idx = *(int*)cur;
+			last_idx_ptr = cur;
+		}
+		if(res>0){ // left
+			cur+=set->elemSize;
+			cur_idx = *(int*)cur;
+			last_idx_ptr = cur;
+		}
+	}
+	assert(0);
 }
 
 void destruct(sortedset *set)
 {
+	if(set->freefn) {
+		for(int i=0; i<set->logic_n; i++){
+			set->freefn(set->base + sizeof(int) + i*(set->elemSize + 8));
+		}
+	}
+	free(set->base);
 }
