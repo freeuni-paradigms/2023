@@ -5,7 +5,8 @@
 
 typedef struct
 {
-	void *base; // alloc_n*(elemSize + 2*sizeof(int)) + sizeof(int)
+	void *base; 
+	// sizeof(int) + alloc_n*(elemSize + 2*sizeof(int))
 	int logic_n;
 	int alloc_n;
 	// user defined:

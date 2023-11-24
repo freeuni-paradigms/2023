@@ -14,6 +14,7 @@ https://classroom.google.com/c/NjIzNTk0MDIxOTUy?cjc=pa3fp55
 | 01 - rsg | 3 | https://classroom.github.com/a/F_X9bgyM | 12/10/2023 |
 | 02 - six degrees | 7 | https://classroom.github.com/a/bd6CKJ7c | 29/10/2023 |
 | 03 - vector hashset | 7 | https://classroom.github.com/a/4WAKVXSG | 14/11/2023 |
+| 04 - rss news search | 7 | https://classroom.github.com/a/ZY8AqeCZ | 03/12/2023 |
 
 
 ## Git basics

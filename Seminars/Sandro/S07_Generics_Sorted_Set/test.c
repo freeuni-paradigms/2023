@@ -14,6 +14,12 @@ int cmpfn(const void *aPtr, const void *bPtr)
     return a - b;
 }
 
+void freefnstr(void* s){ // T = char*
+	char*my_s = *(char**)s;
+
+
+}
+
 int main()
 {
     // sortedset set;
@@ -23,10 +29,16 @@ int main()
     int a = 21;
     int b = 0;
     SetAdd(set, &a);
-    printf("Length: %d\n", set->logLen);
-    void *result = SetSearch(set, &b);
+    SetAdd(set, &b);
+	 for(int i=0; i<100; i++){
+		 int x = 100+i;
+		 SetAdd(set, &x);
+	 }
+    printf("Length: %d\n", set->logic_n);
+    int *result = SetSearch(set, &b);
     if (result == NULL)
         printf("Elem not found \n");
+    printf("Element: %d\n", *result);
 
     int *newResult = (int *)SetSearch(set, &a);
     printf("Element: %d\n", *newResult);

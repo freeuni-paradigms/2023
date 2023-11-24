@@ -1,0 +1,8 @@
+make vector sorted_multi_set
+make -C tests run_tests
+./run_tests
++ makefile
++ vector.h
++ vector.c
++ tests/makefile
++ tests/tests.c
