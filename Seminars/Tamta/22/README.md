@@ -1,3 +1,5 @@
+# [ჰენდაუთი](https://github.com/freeuni-paradigms/2021/blob/master/handouts/29-Introduction-To-Scheme.pdf)
+
 # პირობები
 
 1. დაწერეთ ფუნქცია რომელიც გადაცემული ლისტისთვის დააბრუნებს პირველ ელემენტს, ან "None"-ს თუ ლისტი ცარიელია
