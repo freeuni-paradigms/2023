@@ -24,23 +24,31 @@
 ; 2
 (define (count a lst)
     (sum
-        (map (lambda (elem) 
-            (if (equal? elem a) 1
-                0
-            ))
-        lst
+        (map 
+            (lambda (elem) 
+                (if (equal? elem a) 1
+                    0
+                )
+            )
+            lst
         )
     )
+)
+
+; count but in one line
+(define (count a lst)
+    (sum (map (lambda (elem) (if (equal? elem a) 1 0)) lst))
 )
 
 (define (set lst)
     (cond 
         ((null? lst) lst)
-        ((equal?
-            0
-            (count (car lst) (set (cdr lst)))
-        )
-        (cons (car lst) (set (cdr lst)))
+        (
+            (equal?
+                0
+                (count (car lst) (set (cdr lst)))
+            )
+            (cons (car lst) (set (cdr lst)))
         )
         (else (set (cdr lst)))
     )
@@ -53,13 +61,12 @@
 ; 3
 (define (mul_helper n elem)
     (if (= n 0) '()
-            (cons elem (mul_helper (- n 1) elem)
-        )
+        (cons elem (mul_helper (- n 1) elem))
     )
 )
 
 (define (multiply n lst) 
-    (apply append (map 
-        (lambda (elem) (mul_helper n elem)) 
-    lst))
+    (apply append 
+        (map (lambda (elem) (mul_helper n elem)) lst)
+    )
 )
