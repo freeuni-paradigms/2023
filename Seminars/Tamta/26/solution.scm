@@ -1,23 +1,23 @@
 ; partition with recursion
 (define (partition n lst)
     (if (null? lst) '(()())
-    (let
-        ((elem (car lst)) (rest_ans (partition n (cdr lst))))
-        (cond
-            ((< elem n) 
-                (list
-                    (cons elem (car rest_ans))
-                    (cadr rest_ans)
+        (let
+            ((elem (car lst)) (rest_ans (partition n (cdr lst))))
+            (cond
+                ((< elem n) 
+                    (list
+                        (cons elem (car rest_ans))
+                        (cadr rest_ans)
+                    )
                 )
-            )
-            (else
-                (list
-                    (car rest_ans)
-                    (cons elem (cadr rest_ans))
+                (else
+                    (list
+                        (car rest_ans)
+                        (cons elem (cadr rest_ans))
+                    )
                 )
             )
         )
-    )
     )
 )
 
