@@ -94,3 +94,59 @@
 ;;
 
 
+
+(define (get_neighbours g x)
+  (apply append (map
+	 (lambda (edge)
+		(
+		 let
+		 (
+		  (a (car edge))
+		  (b (cadr edge))
+		  )
+		 (cond
+			((= a x) (list b))
+			((= b x) (list a))
+			(else '())
+			)
+		 )
+		)
+	 g
+	 ))
+  )
+
+(define (contains lst x)
+  (eval (cons or (map (lambda (elem) (= x elem)) lst)))
+  )
+
+(define (bfs g end q visited) ; -> t/f
+  (cond
+	 ((null? q) #f)
+	 ((= (car q) end) #t)
+	 ;; if (car q) in visited; 
+	 ((contains visited (car q))   (bfs 
+				g 
+				end 
+				(cdr q)
+				visited
+				))
+	 (else (bfs 
+				g 
+				end 
+				(append (cdr q) (get_neighbours g (car q)))
+				(cons (car q) visited)
+				)
+			 )
+	)
+  )
+
+
+(define (isWay? g start end)
+  (bfs g end (list start) '())
+  )
+
+
+
+
+
+

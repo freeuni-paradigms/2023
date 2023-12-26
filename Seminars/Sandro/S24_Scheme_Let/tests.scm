@@ -32,8 +32,19 @@
 (display (if (equal? (permutation? '(1 3 4 5) '(5 3 1 4)) #t) "permutation? 14 SUCCESS" "permutation? 14 FAILURE"))(newline)
 (display (if (equal? (permutation? '(1 1) '(1 2)) #f) "permutation? 15 SUCCESS" "permutation? 15 FAILURE"))(newline)
 
+
+(display (if (equal? (get_neighbours '((1 2) (2 3) (1 3) (2 4)) 3) '(2 1)) "get_neighbours 16 SUCCESS" "get_neighbours 16 FAILURE"))(newline)
+(display (if (equal? (get_neighbours '((1 2) (2 3) (3 1) (2 4)) 3) '(2 1)) "get_neighbours 17 SUCCESS" "get_neighbours 17 FAILURE"))(newline)
+(display (if (equal? (get_neighbours '((1 2)) 3) '()) "get_neighbours 18 SUCCESS" "get_neighbours 18 FAILURE"))(newline)
+
+
+(display (if (equal? (contains '(1 2 3 4 6) 4) #t) "contains 18 SUCCESS" "contains 18 FAILURE"))(newline)
+(display (if (equal? (contains '(1 2 3 4 4) 4) #t) "contains 18 SUCCESS" "contains 18 FAILURE"))(newline)
+(display (if (equal? (contains '(1 2 3 4 6) 5) #f) "contains 18 SUCCESS" "contains 18 FAILURE"))(newline)
+
+
 ;;
-;;
-;; (display (if (equal? (isWay? '((1 2) (2 3) (1 3) (2 4)) 1 4) #t) "isWay? 16 SUCCESS" "isWay? 16 FAILURE"))(newline)
-;; (display (if (equal? (isWay? '((1 2) (2 3) (1 3) (4 5)) 1 5) #f) "isWay? 17 SUCCESS" "isWay? 17 FAILURE"))(newline)
-;; (display (if (equal? (isWay? '((1 2)) 1 1) #t) "isWay? 18 SUCCESS" "isWay? 18 FAILURE"))(newline)
+;; ;;
+(display (if (equal? (isWay? '((1 2) (2 3) (1 3) (2 4)) 1 4) #t) "isWay? 16 SUCCESS" "isWay? 16 FAILURE"))(newline)
+(display (if (equal? (isWay? '((1 2) (2 3) (1 3) (4 5)) 1 5) #f) "isWay? 17 SUCCESS" "isWay? 17 FAILURE"))(newline)
+(display (if (equal? (isWay? '((1 2)) 1 1) #t) "isWay? 18 SUCCESS" "isWay? 18 FAILURE"))(newline)
