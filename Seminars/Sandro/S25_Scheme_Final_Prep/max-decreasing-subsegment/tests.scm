@@ -1,0 +1,141 @@
+(load "max-decreasing-subsegment.scm")
+
+;; Testing lib
+
+(define (assert-eq actual expected)
+  (let ((act (eval actual))
+	(exp (eval expected)))
+	(if (equal? act exp) (list #t)
+	    (list #f actual expected act exp))))
+
+(define (is-list-tests args)
+  (cond ((null? args) #f)
+	((equal? "--list_tests" (car args)) #t)
+	(else (is-list-tests (cdr args)))))
+
+(define (is-run-test args)
+  (cond ((null? args) #f)
+	((string-prefix? "--run_test=" (car args)) (substring (car args) (length "--run_test=") (length (car args))))
+	(else (is-run-test (cdr args)))))
+
+(define (is-score args)
+  (cond ((null? args) #f)
+	((string-prefix? "--results_file=" (car args)) (substring (car args) (length "--results_file=") (length (car args))))
+	(else (is-score (cdr args)))))
+
+(define (assign-weights weight tests)
+  (if (null? tests) '()
+      (cons (list (caar tests) weight (cadr (car tests)))
+	      (assign-weights weight (cdr tests)))))
+
+(define (extract-suite-tests suite)
+  (assign-weights (/ (car suite) (length (cadr suite)))
+		  (cadr suite)))
+
+(define (extract-tests suites)
+  (if (null? suites) '()
+      (append (extract-suite-tests (car suites))
+	      (extract-tests (cdr suites)))))  
+
+(define (extract-names tests)
+  (map car tests))
+
+(define (run-test test)
+  (display "TESTING: ")
+  (display (car test))
+  (newline)
+  (let ((res (apply assert-eq (caddr test))))
+    (if (not (car res))
+	(begin
+	  (display "Expected: ")
+	  (display (car (cddddr res)))
+	  (display " Got: ")
+	  (display (cadddr res))
+	  (newline)))
+    (display "TEST ")
+    (display (car test))
+    (display (if (car res) ": SUCCESS" ": FAILURE"))
+    (newline)
+    (car res)))
+
+(define (run-tests tests)
+  (map run-test tests))
+
+(define (filter expr seq)
+  (cond ((null? seq) '())
+	((expr (car seq)) (cons (car seq) (filter expr (cdr seq))))
+	(else (filter expr (cdr seq)))))
+
+(define (find-test name tests)
+  (filter (lambda (test) (equal? name (car test))) tests))
+
+(define (display-names tests)
+  (map (lambda (name) (display name)(newline))
+       (extract-names tests))
+  #t)
+
+(define (read-all-lines in)
+  (let ((line (read-line in)))
+    (if (eof-object? line) '()
+	(cons line (read-all-lines in)))))
+
+(define (line->result line)
+  (let ((items (string-split line " ")))
+    (list (car items) (string->number (cadr items)))))
+
+(define (lines->results lines)
+  (if (null? lines) '()
+      (cons (line->result (car lines)) (lines->results (cdr lines)))))
+
+(define (read-results results-file)
+  (define in (open-input-file results-file))
+  (let ((results (lines->results (read-all-lines in))))
+    (close-input-port in)
+    results))
+
+(define (calculate-score results-file tests)
+  (apply + (map * (map cadr (read-results results-file))
+		(map cadr tests))))
+       
+(define (process-tests args tests)
+  (cond ((is-list-tests args) (display-names tests))
+	((is-score args) (display (calculate-score (is-score args) tests)))
+	((is-run-test args)
+	 (eval (cons and (run-tests (find-test (is-run-test args) tests)))))
+	(else (eval (cons and (run-tests tests))))))
+
+;; End of testing lib
+
+(define (from-to from to)
+  (if (>= from to) (cons from (from-to (- from 1) to))
+      '()))
+
+(define (generate-tests)
+  (quasiquote ((0.9 (("T-1" ((max-decreasing-subsegment '(1 2 3 4 3 2 1))
+		  '(4 3 2 1)))
+	  ("T-2" ((max-decreasing-subsegment '(8 7 9 4 6 5))
+		  '(9 4)))
+	  ("T-3" ((max-decreasing-subsegment '(2 2 2 2 1 1 1 1 1 ))
+		  '(2 1)))
+	  ("T-4" ((max-decreasing-subsegment '(5 4 3 2 4 3 2 1))
+		  '(5 4 3 2)))
+	  ("T-5" ((max-decreasing-subsegment '(7 7 6 6 5 5 4 4 3 3))
+		  '(7 6))) 
+	  ("T-6" ((max-decreasing-subsegment '(1 2 3 4 5 6 7 8 9))
+		  '(9)))
+	  ("T-7" ((max-decreasing-subsegment '(9 7 8 6 4 5 2 3 1))
+		  '(8 6 4)))
+	  ("T-8" ((max-decreasing-subsegment '(2 2 2 2))
+		  '(2)))
+	  ("T-9" ((max-decreasing-subsegment '(9 8 7 6 5 4 3 2 1 0))
+		  '(9 8 7 6 5 4 3 2 1 0)))
+	  ("T-10" ((max-decreasing-subsegment '(8 6 4 2 0 9 7 5 3 1))
+		   '(9 7 5 3 1)))))
+    (0.1 (("T-11" ((max-decreasing-subsegment '(unquote (from-to 100 1)))
+		   '(unquote (from-to 100 1))))
+	  ("T-12" ((max-decreasing-subsegment '(unquote (from-to 1000 1)))
+		   '(unquote (from-to 1000 1)))))))))
+
+(if (not (process-tests (vector->list command-line-arguments)
+			(extract-tests (generate-tests))))
+    (exit 1))
