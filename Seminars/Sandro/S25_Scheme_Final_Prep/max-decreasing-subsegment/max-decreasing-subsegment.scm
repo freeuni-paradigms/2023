@@ -1,38 +1,47 @@
-(define (last-elem lst)
-  (if (null? (cdr lst)) (car lst)
-    (last-elem (cdr lst))
+
+(define (lex_cmp l1 l2)
+  (cond
+	 ((null? l1) l1)
+	 ((< (car l1) (car l2))   l2 )
+	 ((> (car l1) (car l2))   l1 )
+	 (else (cons (car l1) (lex_cmp (cdr l2) (cdr l2))))
+	 )
   )
-)
 
-(define (push-back sequence elem)
-  (append sequence (list elem))
-)
+(define (pick_best l1 l2)
+  (cond 
+	 ((< (length l1) (length l2)) l2)
+	 ((> (length l1) (length l2)) l1)
+	 (else (reverse (lex_cmp (reverse l1) (reverse l2))))
+	 )
+	)
 
-(define (get-result-equal a b)
-  (cond ((null? a) #t)
-	((> (car a) (car b)) #t)
-	((< (car a) (car b)) #f)
-	(else (get-result-equal (cdr a) (cdr b))))
-)
 
-(define (get-result curr-mds curr-result)
-  (if (> (length curr-mds) (length curr-result)) curr-mds
-    (if (< (length curr-mds) (length curr-result)) curr-result
-      (if (get-result-equal curr-mds curr-result) curr-mds
-        curr-result
-      )
-    )
+
+
+(define (max-decreasing-subsegment-helper lst cur)
+  (if (null? lst) '()
+
+  (let
+	 (
+	  (max_dec_sub
+		 (cond 
+			 ((null? cur)  (list (car lst))   )
+			 ((< (car lst) (car cur)) (cons (car lst) cur) )
+			 (else (list (car lst)))
+			)
+		 )
+	  )
+	 (pick_best
+		 (max-decreasing-subsegment-helper (cdr lst) max_dec_sub)
+			max_dec_sub
+	 )
+	 )
   )
-)
-
-(define (mds-rec sequence curr-mds curr-result)
-  (if (null? sequence) curr-result
-    (if (> (last-elem curr-mds) (car sequence)) (mds-rec (cdr sequence) (push-back curr-mds (car sequence)) (get-result (push-back curr-mds (car sequence)) curr-result))
-      (mds-rec (cdr sequence) (list (car sequence)) (get-result curr-result (list (car sequence))))
-    )
   )
-)
 
-(define (max-decreasing-subsegment sequence)
-  (mds-rec (cdr sequence) (list (car sequence)) (list (car sequence)))
-)
+
+(define (max-decreasing-subsegment lst)
+	(reverse (max-decreasing-subsegment-helper lst '()))
+  )
+
