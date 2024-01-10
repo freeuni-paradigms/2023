@@ -4,6 +4,8 @@
 კოდი: **pa3fp55**
 https://classroom.google.com/c/NjIzNTk0MDIxOTUy?cjc=pa3fp55
 
+## შეფასებები
+https://script.google.com/a/macros/freeuni.edu.ge/s/AKfycbwgdFnNDXIWB5ISOaHkilnNPwIaiQ0fS3IdfNZoTNGpGXkh0xv434b8Ei-asjK8EmgO-g/exec
 
 ## დავალებები
 დავალებებისთვის გამოვიყენებთ **GitHub Classrooms**, სადაც ყველა დავალებისთვის რეპოზიტორიები შექმნილია. თქვენ მოგიწევთ ინდივიდუალურად დავალებების მოსაწვევები გაააქტიუროთ, რის შემდეგაც თქვენთვის განკუთვნილი პერსონალური რეპოზიტორია შეიქმნება ავტომატურად. რომელიც შეგიძლიათ ლოკალურად ჩამოტვირთოთ თქვენს მანქანაზე **git clone** ბრძანების გამოყენებით, ხოლო **git push** ბრძანებებით კი თქვენი ცვლილებები ატვირთოთ გიტჰაბზე. კოლაბორატორებში არავის დამატება არ მოგიწევთ, ლექტორებს და სექციის ლიდერებს თქვენს რეპოზიტორიებზე წვდომა ავტომატურად ექნება. ვინც მეორედ გადიხართ საგანს და თავიდან გინდათ დავალებების გამოგზავნა თქვენც მოგიწევთ ქვემოთ მოცემული მოსაწვევების გააქტიურება და ახალ რეპოზიტორიაში ნამუშევრების ატვირთვა.
@@ -15,6 +17,8 @@ https://classroom.google.com/c/NjIzNTk0MDIxOTUy?cjc=pa3fp55
 | 02 - six degrees | 7 | https://classroom.github.com/a/bd6CKJ7c | 29/10/2023 |
 | 03 - vector hashset | 7 | https://classroom.github.com/a/4WAKVXSG | 14/11/2023 |
 | 04 - rss news search | 7 | https://classroom.github.com/a/ZY8AqeCZ | 03/12/2023 |
+| 07 - where am i | 4 | https://classroom.github.com/a/ZY8AqeCZ | 01/11/2024 |
+| bonus | 10 | https://classroom.github.com/a/M3LZs-pp | fx ის დროს |
 
 
 ## Git basics
